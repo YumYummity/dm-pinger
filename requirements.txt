@@ -1,6 +1,0 @@
-# Requirements are handled by main script.
-pycryptodome
-colorama
-requests
-asyncio
-discord.py-self
