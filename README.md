@@ -35,22 +35,21 @@ Input a discord webhook link. Logs will be sent there! Input anything that's not
 **Invalid links will cause an exception, and the script will reset** <br />
 **Look at [Making a Webhook](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks#:~:text=%C2%A0%20Facebook-,MAKING%20A%20WEBHOOK,-With%20that%20in)** <br />
 
-- Other Options <br />
+- Webhook Interval <br />
 If you inputted a webhook: <br />
 ![image](https://user-images.githubusercontent.com/103061664/196053985-198e0e44-2737-46e2-b20f-b814f024a569.png) <br />
 Input a number from 1-∞. Every time you ping your friend that many times, a log is sent to the webhook. <br />
 **This option does not show up if you're not logging.** <br />
-| <br />
+- Maximum Pings <br />
 ![image](https://user-images.githubusercontent.com/103061664/196054060-8412bbc4-af68-4a35-8833-980a6d6acecf.png) <br />
 Input the amount of pings you want. <br />
-| <br />
+- Ping Delay <br />
 ![image](https://user-images.githubusercontent.com/103061664/196054196-dc084b5e-2d94-4612-89be-a800e6285aeb.png) <br />
 Input the delay you want between pings. <br />
 *I recommend 1.5 for less pings, 7.5 if you're using it for more than an hour, and 20 if you're doing it overnight.*
-| <br />
-**That's it! Your friend should be pinged!** <br />
 
 </details>
+**That's it! Your friend should be pinged!** <br />
 
 
 # Compiling
