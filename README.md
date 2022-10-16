@@ -2,7 +2,7 @@
 Mass ping one of your friends.
 
 # selfbotting
-Selfbotting is against Discord's TOS. This repository is a POC!
+Selfbotting is against Discord's TOS. This repository is a POC (proof of concept)!
 
 # features
 - dm-pinger will automatically install requirements
