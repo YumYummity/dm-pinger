@@ -52,7 +52,7 @@ Input the delay you want between pings. <br />
 
 </details>
 
-**That's it! Your friend should be pinged!**
+**That's it! Your friend should be mass pinged!**
 
 # Compiling
 Set the variable 'EXE' to True in the code
