@@ -1,6 +1,7 @@
 # DM-pinger
 Mass ping one of your friends.
-For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/tag/v0.1)
+For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/tag/v0.1) <br />
+This was made for Windows. Feel free to fork it and make a Mac, Linux, or iOS version! (You could honestly just remove `Auto-detect accounts` and have the user manually input their token.)
 
 # Disclaimer
 Selfbotting is against Discord's TOS. This repository is a POC (proof of concept)!
