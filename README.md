@@ -17,4 +17,4 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 Set the variable 'EXE' to True in the code
 
 # crediting
-You must credit me if you use this code anywhere else. More info in license.md
+You must credit me if you use this code anywhere else. More info in [license.md](https://github.com/YumYummity/dm-pinger/blob/main/LICENSE.md)
