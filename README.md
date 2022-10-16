@@ -49,8 +49,7 @@ Input the delay you want between pings. <br />
 *I recommend 1.5 for less pings, 7.5 if you're using it for more than an hour, and 20 if you're doing it overnight.*
 
 </details>
-**That's it! Your friend should be pinged!** <br />
-
+**That's it! Your friend should be pinged!**
 
 # Compiling
 Set the variable 'EXE' to True in the code
