@@ -1,5 +1,6 @@
 # dm-pinger
 Mass ping one of your friends.
+For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/tag/v0.1)
 
 # selfbotting
 Selfbotting is against Discord's TOS. This repository is a POC (proof of concept)!
