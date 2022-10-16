@@ -6,10 +6,9 @@ For quick use, I recommend looking at the [latest release](https://github.com/Yu
 Selfbotting is against Discord's TOS. This repository is a POC (proof of concept)!
 
 # Features
-- dm-pinger will automatically install requirements
-- dm-pinger will automatically find discord accounts on your computer, so you can quickly spam your friend's DMs without getting your token
-- dm-pinger includes optional webhook logging, including ETA, and amount pinged
-- auto-stop when your ex-friend blocks you
+- DM-pinger will automatically find discord accounts on your computer, so you can quickly spam your friend's DMs without getting your token
+- DM-pinger includes optional webhook logging, including ETA, and amount pinged
+- Auto-Stop when your ex-friend blocks you (this is probably the biggest risk, as long as you set a reasonable delay. I recommend 1.5 second delay)
 
 # To-Do
 - Nothing, make an issue for request
