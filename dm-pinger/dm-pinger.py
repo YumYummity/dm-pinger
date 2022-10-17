@@ -259,13 +259,13 @@ try:
                 print(f'{Fore.RED}Invalid input. Using default 1000.')
                 amount = 1000
             try:
-                delaya = input(f'\n{Fore.LIGHTBLUE_EX}How long between messages (in seconds)? Choose a value between 0.5-20.0, higher values is recommended for longer periods:{Fore.RESET} ')
+                delaya = input(f'\n{Fore.LIGHTBLUE_EX}How long between messages (in seconds)? Choose a value between 1.5-20.0, higher values is recommended for longer periods:{Fore.RESET} ')
                 delaya = float(delaya)
-                if delaya < 0.5 or delaya > 20:
+                if delaya < 1.5 or delaya > 20:
                     raise TypeError('no not valid range')
             except:
                 print(f'{Fore.RED}Invalid input. Using default 1')
-                delaya = 1.0
+                delaya = 1.5
             async def logs(dmn):
                 if weblogging:
                     webhooka = Webhook(url=webhookab[0])
