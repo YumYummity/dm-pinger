@@ -59,6 +59,7 @@ Input the delay you want between pings. <br />
 
 # Compiling
 Set the variable 'EXE' to True in the code
+**Make sure you have discord.py-self installed while compiling, and not discord.py**
 
 # Crediting
 You must credit me if you use this code anywhere else. More info in [LICENSE.md](https://github.com/YumYummity/dm-pinger/blob/main/LICENSE.md)
