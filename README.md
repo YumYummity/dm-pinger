@@ -10,6 +10,7 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 - DM-pinger will automatically find discord accounts on your computer, so you can quickly spam your friend's DMs without getting your token
 - DM-pinger includes optional webhook logging, including ETA, and amount pinged
 - Auto-Stop when your ex-friend blocks you (this is probably the biggest risk, as long as you set a reasonable delay. I recommend 1.5 second delay)
+- PyPresence! [![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 
 # To-Do
 - Nothing, make an issue for request
