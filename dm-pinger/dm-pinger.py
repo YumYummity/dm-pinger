@@ -10,13 +10,20 @@ try:
     from win32crypt import CryptUnprotectData
     from json import loads
     try:
+        from pypresence import AioPresence
+    except:
+        system('pip install -U pypresence')
+        from pypresence import AioPresence
+    from time import time
+    from asyncio import sleep, get_event_loop
+    try:
         from colorama import Fore, init, Back, Style
     except:
         system('pip install -U colorama')
         from colorama import Fore, init, Back, Style
     init()
     print(f'{Style.BRIGHT}')
-    EXE = False #set to true when compiling
+    EXE = True #set to true when compiling
     notauto = False
     if not EXE:
         system('pip uninstall -y discord.py')
@@ -280,11 +287,25 @@ try:
             pings = 0
             ra = delaya/14
             rb = delaya/8
+            client_id = '1031332954670116914'
+            RPC = None
             async def start(self):
                 nonlocal pings
+                nonlocal RPC
+                print('Starting in 5 seconds!')
+                await sleep(2.5)
+                loop = get_event_loop()
+                await sleep(2.5)
+                RPC = AioPresence(client_id, loop=loop)
+                await RPC.connect()
                 eta = str(amount*delaya) + ' seconds'
                 print(f'\nPinging started! ETA: {eta}\n')
                 await logs(f'Pinging started! ETA: `{eta}`')
+                # editing buttons is a violation of LICENSE.md
+                buttons = [{"label": 'DM-Pinger', "url": "https://github.com/YumYummity/dm-pinger/releases/v0.1"}, {"label": "Github", "url": "https://github.com/YumYummity/dm-pinger/"}]
+                picl = ['ping', 'ping1', 'ping2']
+                start = time()
+                pi = 0 #choose 0-2 for different images
                 for p in range(amount):
                     try:
                         await inputt.send(f'{inputt.mention} ping')
@@ -293,6 +314,7 @@ try:
                     except HTTPException:
                         return 'blocked'
                     pings = pings + 1
+                    await RPC.update(state='Spamming my friend\'s DMs',details=f'Pings sent: {pings}', buttons=buttons,small_image=picl[pi],start=start)
                     sign = choice(['+', '-'])
                     evex = str(delaya) + str(sign) + str(uniform(ra, rb))
                     delayb = eval(evex)
@@ -301,17 +323,20 @@ try:
                     async def divisible_by(x, y):
                         if (x % y) == 0:
                             return True
-                        else: 
+                        else:
                             return False
                     if (await divisible_by(pings, intervalah)):
                         await logs(pings)
                 print('\n\nFinished sending pings!')
                 await logs(f'Finished sending pings! `{pings}`')
+                await sleep(20)
+                await RPC.clear()
             t = await start(self)
             if t == 'blocked':
                 await logs(f'Your friend blocked you! Pings sent: `{pings}`')
                 print(f'{Fore.RED}Your friend blocked you! Pings sent: `{pings}`')
-
+                await sleep(20)
+                await RPC.clear()
     cl = client()
     cl.run(token)
 except Exception as e:
