@@ -50,6 +50,7 @@ Input the amount of pings you want. <br />
 - Ping Delay <br />
 ![image](https://user-images.githubusercontent.com/103061664/196054196-dc084b5e-2d94-4612-89be-a800e6285aeb.png) <br />
 Input the delay you want between pings. <br />
+**This was updated. The minimum delay is now 1.5**
 *I recommend 1.5 for less pings, 7.5 if you're using it for more than an hour, and 20 if you're doing it overnight.*
 
 </details>
