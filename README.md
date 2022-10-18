@@ -16,6 +16,8 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 # To-Do
 - Fix a lot of bugs
 - Make PyPresence not abort code if running without discord app
+- More modes (oh no its wall mode and minigun mode)
+- more more more bug fixes
 
 # Prompts
 `A guide to all the prompts. Everything is caps-sensitive!`
