@@ -1,7 +1,9 @@
 # DM-pinger
 Mass ping one of your friends.
 For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/latest) <br />
-This was made for Windows. Feel free to fork it and make a Mac, Linux, or iOS version! (You could honestly just remove `Auto-detect accounts` and have the user manually input their token.)
+This was made for Windows. Feel free to fork it and make a Mac, Linux, or iOS version! (You could honestly just remove `Auto-detect accounts` and have the user manually input their token.) <br />
+
+This program gets false detected by anti-malware, and VirusTotal returns 7 hits. **This program is not malware, it contains code to find tokens on your computer to automatically get accounts (feature #1), and *optional* webhook logging.**
 
 # Disclaimer
 Selfbotting is against Discord's TOS. This repository is a POC (proof of concept)!
