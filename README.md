@@ -14,7 +14,8 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 [![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 
 # To-Do
-- Nothing, make an issue for request
+- Fix a lot of bugs
+- Make PyPresence not abort code if running without discord app
 
 # Prompts
 `A guide to all the prompts. Everything is caps-sensitive!`
