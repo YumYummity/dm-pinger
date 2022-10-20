@@ -1,4 +1,4 @@
-# DM-pinger
+# DM-pinger v0.3
 Mass ping one of your friends.
 For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/latest) <br />
 This was made for Windows. Feel free to fork it and make a Mac, Linux, or iOS version! (You could honestly just remove `Auto-detect accounts` and have the user manually input their token.) <br />
@@ -12,14 +12,12 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 - DM-pinger will automatically find discord accounts on your computer, so you can quickly spam your friend's DMs without getting your token
 - DM-pinger includes optional webhook logging, including ETA, and amount pinged
 - Auto-Stop when your ex-friend blocks you (this is probably the biggest risk, as long as you set a reasonable delay. I recommend 1.5 second delay)
+- Modes! Choose from 5 different modes to spam ping your friend with.
 - PyPresence! <br />
 [![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 
 # To-Do
-- Fix a lot of bugs
-- Make PyPresence not abort code if running without discord app
-- More modes (oh no its wall mode and minigun mode)
-- more more more bug fixes
+- Finished previous todo, create an issue for more features.
 
 # Prompts
 `A guide to all the prompts. Everything is caps-sensitive!`
