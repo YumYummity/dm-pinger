@@ -377,7 +377,11 @@ try:
                 await sleep(2.5)
                 loop = get_event_loop()
                 await sleep(2.5)
-                RPC = AioPresence(client_id, loop=loop)
+                try:
+                    RPC = AioPresence(client_id, loop=loop)
+                except Exception as e:
+                    print(f'RPC could not start: {e}')
+                    RPC = False
                 try:
                     await RPC.connect()
                 except Exception as e:
