@@ -17,10 +17,11 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 [![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 
 # To-Do
-- Finished previous todo, create an issue for more features.
+- Ping counter at bottom of ping text
+- Ad to every 50 pings
 
 # Prompts
-`A guide to all the prompts. Everything is caps-sensitive!`
+`A guide to all the prompts. Everything is caps-sensitive!` *Update soon about v0.3*
 
 <details><summary> Show Prompts </summary>
 
