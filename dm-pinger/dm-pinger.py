@@ -22,7 +22,7 @@ try:
         from colorama import Fore, init, Back, Style
     init()
     print(f'{Style.BRIGHT}')
-    EXE = True #set to true when compiling
+    EXE = False #set to true when compiling
     notauto = False
     if not EXE:
         system('pip uninstall -y discord.py')
