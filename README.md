@@ -19,7 +19,9 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 # To-Do
 - Ping counter at bottom of ping text
 - Custom message
-- Fix "friend blocked" message when rate-limited
+- Fix "friend blocked" message when rate-limited (too fast (burst mode, gotta slow that down))
+- Slow burst mode down
+- Prevent launching of multiple at once (safety)
 
 # Prompts
 `A guide to all the prompts. Everything is caps-sensitive!` *Update soon about v0.3*
