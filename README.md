@@ -24,7 +24,7 @@ Selfbotting is against Discord's TOS. This repository is a POC (proof of concept
 - Prevent launching of multiple at once (safety)
 
 # Prompts
-`A guide to all the prompts. Everything is caps-sensitive!` *Update soon about v0.3*
+`A guide to all the prompts. Everything is caps-sensitive!` *Update eventually about v0.4*
 
 <details><summary> Show Prompts </summary>
 
