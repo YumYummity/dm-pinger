@@ -1,5 +1,5 @@
 try:
-    from requests import get
+    from requests import get, post
     from random import uniform, choice
     from string import ascii_letters
     from os import system, listdir, getenv, mkdir, remove
@@ -26,8 +26,12 @@ try:
     notauto = False
     if not EXE:
         system('pip uninstall -y discord.py')
-        system('pip install -U discord.py-self')
-        from discord import Client, Forbidden, HTTPException
+        system('pip install -U git+https://github.com/dolfies/discord.py-self')
+        try:
+            from discord import Client, Forbidden, HTTPException
+        except:
+            print("Please install GIT.")
+            exit()
     elif EXE:
         from discord import Client, Forbidden, HTTPException
     else:
@@ -81,9 +85,9 @@ try:
             data = get('https://discordapp.com/api/v9/users/@me',
                     headers={"Authorization": token}).json()
             global abcdef
-            abcdef = abcdef + [[f"{data['username']}#{data['discriminator']}", token]]
+            abcdef = abcdef + [[f"{data['username']}" + (f"#{data['discriminator']}" if int(data['discriminator']) != 0 else ""), token]]
         def checkToken(self, token: str) -> str:
-            if get("https://discord.com/api/v9/auth/login",
+            if post("https://discord.com/api/v9/auth/login",
                 headers={"Authorization": token}).status_code == 200:
                 return True
             else:
@@ -170,7 +174,7 @@ try:
     if notauto:
         if gv(version):
             print(f'{Fore.RED} An update is available on github:{Fore.YELLOW} https://github.com/YumYummity/dm-pinger/{Fore.RESET}\n')
-        print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
+        print('\nHow to get your token: https://www.howtogeek.com/879956/what-is-a-discord-token-and-how-do-you-get-one/')
         print('The token will not be used for anything other than spamming a friend.\n')
         token = input(f'{Fore.LIGHTBLUE_EX}TOKEN: {Fore.RESET}')
     else:
@@ -183,61 +187,62 @@ try:
         while a:
             for i in abcdef:
                 print(f'{Fore.GREEN}- ' + i[0])
-                print(f'{Fore.GREEN}- CustomToken')
-                if ab:
-                    print(f'{Fore.RED}\n\nThat is not an valid account. Please include the discriminator, and use proper capitalization. (Example: User#0000)\nIf inputting an token, please use a valid token.')
-                    ab = False
-                inputt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose an account to use: {Fore.RESET}')
-                for x in abcdef:
-                    if inputt  == str(x[0]):
-                        a = False
-                        token = x[1]
-                        f = True
-                        break
-                if not f:
-                    if str(inputt) == 'CustomToken':
-                        print('\nHow to get your token: https://www.followchain.org/find-discord-token/')
-                        print('The token will not be used for anything other than spamming a friend.\n')
-                        token = input(f'{Fore.LIGHTBLUE_EX}TOKEN: {Fore.RESET}')
-                        def checkToken(token: str) -> bool:
-                            if get("https://discord.com/api/v9/auth/login",
-                                headers={"Authorization": token}).status_code == 200:
-                                return True
-                            else:
-                                return False
-                        if checkToken(token):
-                            def addTokenData(token: str) -> None:
-                                data = get('https://discordapp.com/api/v9/users/@me',
-                                        headers={"Authorization": token}).json()
-                                global abcdef
-                                abcdef = abcdef + [[f"{data['username']}#{data['discriminator']}", token]]
-                            addTokenData(token)
-                            a = False
-                            f = True
+            print(f'{Fore.GREEN}- CustomToken')
+            if ab:
+                print(f'{Fore.RED}\n\nThat is not an valid account. Please use proper capitalization. (Example: User)\nIf inputting an token, please use a valid token.')
+                ab = False
+            inputt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose an account to use: {Fore.RESET}')
+            for x in abcdef:
+                if inputt  == str(x[0]):
+                    a = False
+                    token = x[1]
+                    f = True
+                    break
+            if not f:
+                if str(inputt) == 'CustomToken':
+                    print('\nHow to get your token: https://www.howtogeek.com/879956/what-is-a-discord-token-and-how-do-you-get-one/')
+                    print('The token will not be used for anything other than spamming a friend.\n')
+                    token = input(f'{Fore.LIGHTBLUE_EX}TOKEN: {Fore.RESET}')
+                    def checkToken(token: str) -> bool:
+                        request = post("https://discord.com/api/v9/auth/login",
+                            headers={"Authorization": token})
+                        if request.status_code == 200:
+                            return True
                         else:
-                            ab = True
+                            return False
+                    if checkToken(token):
+                        def addTokenData(token: str) -> None:
+                            data = get('https://discordapp.com/api/v9/users/@me',
+                                    headers={"Authorization": token}).json()
+                            global abcdef
+                            abcdef = abcdef + [[f"{data['username']}" + (f"#{data['discriminator']}" if int(data['discriminator']) != 0 else ""), token]]
+                        addTokenData(token)
+                        a = False
+                        f = True
                     else:
                         ab = True
+                else:
+                    ab = True
             
     print('Init done. Finished: modules and client.')
 
     class client(Client):
         async def on_connect(self):
-            print(f'\n{Fore.GREEN}Successfully logged on as {self.user.name}#{self.user.discriminator}\n\n')
+            print(f'\n{Fore.GREEN}Successfully logged on as {self.user.name}' + (f"#{self.user.discriminator}" if int(self.user.discriminator) != 0 else "") + '\n\n')
             a = True
             f = False
             ab = False
             while a:
-                for i in self.user.friends:
-                    print(f'{Fore.GREEN}- ' + str(i))
+                for i in self.friends:
+                    print(f'{Fore.GREEN}- ' + str(i.user.name) + (str(i.user.discriminator) if int(i.user.discriminator) != 0 else ""))
                 if ab:
-                    print(f'\n\n{Fore.RED}That is not a friend. Please include the discriminator, and use proper capitalization. (Example: User#0000)')
+                    print(f'\n\n{Fore.RED}That is not a friend. Please use proper capitalization. (Example: User)')
                     ab = False
                 inputt = input(f'\n{Fore.LIGHTBLUE_EX}Please choose a friend to spam ping: {Fore.RESET}')
-                for i in self.user.friends:
-                    if inputt  == str(i):
+                for i in self.friends:
+                    if inputt  == str(i.user.name):
                         a = False
-                        inputt = i
+                        inputt = i.user
                         f = True
                         break
                 if not f:
@@ -357,7 +362,7 @@ try:
             else:
                 ra = delaya/14
                 rb = delaya/8
-            client_id = '1031332954670116914'
+            client_id = '1195529614458626129'
             RPC = None
             async def start(self):
                 nonlocal pings
