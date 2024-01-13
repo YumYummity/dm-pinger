@@ -3,4 +3,4 @@ pycryptodome
 colorama
 requests
 asyncio
-discord.py-self
+-U git+https://github.com/dolfies/discord.py-self
