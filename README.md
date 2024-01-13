@@ -1,4 +1,4 @@
-# DM-pinger v0.3
+# DM-pinger v0.4
 Mass ping one of your friends.
 For quick use, I recommend looking at the [latest release](https://github.com/YumYummity/dm-pinger/releases/latest) <br />
 This was made for Windows. Feel free to fork it and make a Mac, Linux, or iOS version! (You could honestly just remove `Auto-detect accounts` and have the user manually input their token.) <br />
